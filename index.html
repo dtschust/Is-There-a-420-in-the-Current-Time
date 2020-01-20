@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Is There a 420 in the Current Time?</title>
+    <style>
+      body {
+        text-align: center;
+        font-family: sans-serif;
+        transition: 0.5s ease-in-out;
+        transform: rotate(0deg);
+      }
+
+      body.fourtwenty {
+        background: #8ec56a;
+        color: green;
+        transform: rotate(720deg);
+      }
+
+      h1 {
+        font-size: 120px;
+        font-weight: 700;
+      }
+
+      h2 {
+        font-size: 72px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="yesno"></h1>
+    <h2 id="ts"></h2>
+    <script>
+      const dateOptions = { year: '2-digit', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+
+      const answerEl = document.getElementById('yesno');
+      const tsEl = document.getElementById('ts');
+
+      function update() {
+        const dateString = new Date().toLocaleDateString('en-US', dateOptions);
+        const numbersOnly = dateString.replace(/\D/g, '');
+        const contains420 = numbersOnly.includes('420');
+        const contains69 = numbersOnly.includes('69');
+
+        const message = 
+              contains420 ? 
+                'Yes!' : 
+                contains69 ?
+                  'No, but nice.' :
+                  'No.';
+
+        answerEl.innerText = message;
+        tsEl.innerText = dateString;
+
+        if (contains420) {
+            document.body.classList.add('fourtwenty');
+        } else {
+          document.body.classList.remove('fourtwenty');
+        }
+      }
+
+      setInterval(update, 500);
+    </script>
+  </body>
+</html>
